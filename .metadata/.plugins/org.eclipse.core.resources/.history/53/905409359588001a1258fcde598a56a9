@@ -1,0 +1,17 @@
+package com.longnguyen.api;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.longnguyen.dto.NewDTO;
+
+@RestController
+public class NewAPI {
+
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	public NewDTO createNew(@RequestBody NewDTO model) {
+		return model;
+	}
+}

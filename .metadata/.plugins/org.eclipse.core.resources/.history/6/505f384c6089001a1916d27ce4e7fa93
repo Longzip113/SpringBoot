@@ -1,0 +1,51 @@
+package com.longnguyen.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.longnguyen.converter.NewConverter;
+import com.longnguyen.dto.NewDTO;
+import com.longnguyen.entity.CategoryEntity;
+import com.longnguyen.entity.NewEntity;
+import com.longnguyen.repository.CategoryRepository;
+import com.longnguyen.repository.NewRepository;
+import com.longnguyen.service.INewService;
+
+@Service
+public class NewService implements INewService{
+
+	@Autowired
+	private NewRepository newRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private NewConverter newConverter;
+
+	@Override
+	@Transactional
+	public NewDTO save(NewDTO newDTO) {
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(newDTO.getCategoryCode());
+		NewEntity newEntity = null;
+		if (newDTO.getId() != null) {
+			NewEntity oldNew = newRepository.findOne(newDTO.getId());
+			oldNew.setCategoryEntity(categoryRepository.findOneByCode(newDTO.getCategoryCode()));
+			newEntity = newConverter.toEntity(oldNew, newDTO);
+		}else {
+			newEntity = newConverter.toEntity(newDTO);
+			
+		}
+		
+		return newConverter.toDto(newRepository.save(newEntity));
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long[] ids) {
+		for (Long id : ids) {
+			newRepository.delete(id);
+		}
+	}
+}

@@ -1,0 +1,44 @@
+package com.longnguyen.dto;
+
+import java.util.Date;
+
+public class AbstractDTO {
+
+	private Long id;
+	private Date createdData;
+	private Date modifiedData;
+	private String createdBy;
+	private String modifiedBy;
+	
+	public Date getCreatedData() {
+		return createdData;
+	}
+	public void setCreatedData(Date createdData) {
+		this.createdData = createdData;
+	}
+	public Date getModifiedData() {
+		return modifiedData;
+	}
+	public void setModifiedData(Date modifiedData) {
+		this.modifiedData = modifiedData;
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+}

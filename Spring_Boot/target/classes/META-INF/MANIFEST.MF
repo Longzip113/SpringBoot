@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: longnguyen
+Build-Jdk: 11.0.6
+Implementation-Title: Spring_Boot
+Implementation-Version: 1.0
+Implementation-Vendor-Id: com.longnguyen
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/Spring_Boot/
+Created-By: Maven Integration for Eclipse
+

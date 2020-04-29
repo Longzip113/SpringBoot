@@ -1,0 +1,5 @@
+package com.longnguyen.dto;
+
+public class NewDTO {
+
+}

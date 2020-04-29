@@ -1,0 +1,14 @@
+package com.longnguyen.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.longnguyen.repository.NewRepository;
+import com.longnguyen.service.INewService;
+
+@Service
+public class NewService implements INewService{
+
+	@Autowired
+	private NewRepository newRepository;
+}

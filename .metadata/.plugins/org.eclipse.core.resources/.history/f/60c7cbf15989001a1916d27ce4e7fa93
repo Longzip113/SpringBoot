@@ -1,0 +1,44 @@
+package com.longnguyen.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.longnguyen.converter.NewConverter;
+import com.longnguyen.dto.NewDTO;
+import com.longnguyen.entity.CategoryEntity;
+import com.longnguyen.entity.NewEntity;
+import com.longnguyen.repository.CategoryRepository;
+import com.longnguyen.repository.NewRepository;
+import com.longnguyen.service.INewService;
+
+@Service
+public class NewService implements INewService{
+
+	@Autowired
+	private NewRepository newRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private NewConverter newConverter;
+
+	@Override
+	public NewDTO save(NewDTO newDTO) {
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(newDTO.getCategoryCode());
+		NewEntity entity = newConverter.toEntity(newDTO);
+		entity.setCategoryEntity(categoryEntity);
+		entity = newRepository.save(entity);
+		return newConverter.toDto(entity);
+	}
+
+	@Override
+	public NewDTO updata(NewDTO newDTO) {
+		NewEntity oldNewEntity = newRepository.findOne(newDTO.getId());
+		NewEntity newEntity = newConverter.toEntity(oldNewEntity, newDTO); 
+		CategoryEntity categoryEntity = categoryRepository.findOneByCode(newDTO.getCategoryCode());
+		newEntity.setCategoryEntity(categoryEntity);
+		newEntity = newRepository.save(newEntity);
+		return newConverter.toDto(newEntity);;
+	}
+}
